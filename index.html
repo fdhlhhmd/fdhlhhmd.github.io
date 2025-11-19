@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software Engineering Career Path Predictor</title>
+    <style>
+        :root {
+  /* Primitive Color Tokens */
+  --color-white: rgba(255, 255, 255, 1);
+  --color-black: rgba(0, 0, 0, 1);
+  --color-cream-50: rgba(252, 252, 249, 1);
+  --color-cream-100: rgba(255, 255, 253, 1);
+  --color-gray-200: rgba(245, 245, 245, 1);
+  --color-gray-300: rgba(167, 169, 169, 1);
+  --color-gray-400: rgba(119, 124, 124, 1);
+  --color-slate-500: rgba(98, 108, 113, 1);
+  --color-brown-600: rgba(94, 82, 64, 1);
+  --color-charcoal-700: rgba(31, 33, 33, 1);
+  --color-charcoal-800: rgba(38, 40, 40, 1);
+  --color-slate-900: rgba(19, 52, 59, 1);
+  --color-teal-300: rgba(50, 184, 198, 1);
+  --color-teal-400: rgba(45, 166, 178, 1);
+  --color-teal-500: rgba(33, 128, 141, 1);
+  --color-teal-600: rgba(29, 116, 128, 1);
+  --color-teal-700: rgba(26, 104, 115, 1);
+  --color-teal-800: rgba(41, 150, 161, 1);
+  --color-red-400: rgba(255, 84, 89, 1);
+  --color-red-500: rgba(192, 21, 47, 1);
+  --color-orange-400: rgba(230, 129, 97, 1);
+  --color-orange-500: rgba(168, 75, 47, 1);
+
+  /* RGB versions for opacity control */
+  --color-brown-600-rgb: 94, 82, 64;
+  --color-teal-500-rgb: 33, 128, 141;
+  --color-slate-900-rgb: 19, 52, 59;
+  --color-slate-500-rgb: 98, 108, 113;
+  --color-red-500-rgb: 192, 21, 47;
+  --color-red-400-rgb: 255, 84, 89;
+  --color-orange-500-rgb: 168, 75, 47;
+  --color-orange-400-rgb: 230, 129, 97;
+
+  /* Background color tokens (Light Mode) */
+  --color-bg-1: rgba(59, 130, 246, 0.08);
+  --color-bg-2: rgba(245, 158, 11, 0.08);
+  --color-bg-3: rgba(34, 197, 94, 0.08);
+  --color-bg-4: rgba(239, 68, 68, 0.08);
+  --color-bg-5: rgba(147, 51, 234, 0.08);
+  --color-bg-6: rgba(249, 115, 22, 0.08);
+  --color-bg-7: rgba(236, 72, 153, 0.08);
+  --color-bg-8: rgba(6, 182, 212, 0.08);
+
+  /* Semantic Color Tokens (Light Mode) */
+  --color-background: var(--color-cream-50);
+  --color-surface: var(--color-cream-100);
+  --color-text: var(--color-slate-900);
+  --color-text-secondary: var(--color-slate-500);
+  --color-primary: var(--color-teal-500);
+  --color-primary-hover: var(--color-teal-600);
+  --color-primary-active: var(--color-teal-700);
+  --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-secondary-active: rgba(var(--color-brown-600-rgb), 0.25);
+  --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-btn-primary-text: var(--color-cream-50);
+  --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-card-border-inner: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-error: var(--color-red-500);
+  --color-success: var(--color-teal-500);
+  --color-warning: var(--color-orange-500);
+  --color-info: var(--color-slate-500);
+  --color-focus-ring: rgba(var(--color-teal-500-rgb), 0.4);
+  --color-select-caret: rgba(var(--color-slate-900-rgb), 0.8);
+
+  /* Common style patterns */
+  --focus-ring: 0 0 0 3px var(--color-focus-ring);
+  --focus-outline: 2px solid var(--color-primary);
+  --status-bg-opacity: 0.15;
+  --status-border-opacity: 0.25;
+  --select-caret-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23134252' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  --select-caret-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23f5f5f5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+
+  /* RGB versions for opacity control */
+  --color-success-rgb: 33, 128, 141;
+  --color-error-rgb: 192, 21, 47;
+  --color-warning-rgb: 168, 75, 47;
+  --color-info-rgb: 98, 108, 113;
+
+  /* Typography */
+  --font-family-base: "FKGroteskNeue", "Geist", "Inter", -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-family-mono: "Berkeley Mono", ui-monospace, SFMono-Regular, Menlo,
+    Monaco, Consolas, monospace;
+  --font-size-xs: 11px;
+  --font-size-sm: 12px;
+  --font-size-base: 14px;
+  --font-size-md: 14px;
+  --font-size-lg: 16px;
+  --font-size-xl: 18px;
+  --font-size-2xl: 20px;
+  --font-size-3xl: 24px;
+  --font-size-4xl: 30px;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 550;
+  --font-weight-bold: 600;
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --letter-spacing-tight: -0.01em;
+
+  /* Spacing */
+  --space-0: 0;
+  --space-1: 1px;
+  --space-2: 2px;
+  --space-4: 4px;
+  --space-6: 6px;
+  --space-8: 8px;
+  --space-10: 10px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-base: 8px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04),
+    0 2px 4px -1px rgba(0, 0, 0, 0.02);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.04),
+    0 4px 6px -2px rgba(0, 0, 0, 0.02);
+  --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.03);
+
+  /* Animation */
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Layout */
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-gray-400-rgb: 119, 124, 124;
+    --color-teal-300-rgb: 50, 184, 198;
+    --color-gray-300-rgb: 167, 169, 169;
+    --color-gray-200-rgb: 245, 245, 245;
+
+    --color-bg-1: rgba(29, 78, 216, 0.15);
+    --color-bg-2: rgba(180, 83, 9, 0.15);
+    --color-bg-3: rgba(21, 128, 61, 0.15);
+    --color-bg-4: rgba(185, 28, 28, 0.15);
+    --color-bg-5: rgba(107, 33, 168, 0.15);
+    --color-bg-6: rgba(194, 65, 12, 0.15);
+    --color-bg-7: rgba(190, 24, 93, 0.15);
+    --color-bg-8: rgba(8, 145, 178, 0.15);
+
+    --color-background: var(--color-charcoal-700);
+    --color-surface: var(--color-charcoal-800);
+    --color-text: var(--color-gray-200);
+    --color-text-secondary: rgba(var(--color-gray-300-rgb), 0.7);
+    --color-primary: var(--color-teal-300);
+    --color-primary-hover: var(--color-teal-400);
+    --color-primary-active: var(--color-teal-800);
+    --color-secondary: rgba(var(--color-gray-400-rgb), 0.15);
+    --color-secondary-hover: rgba(var(--color-gray-400-rgb), 0.25);
+    --color-secondary-active: rgba(var(--color-gray-400-rgb), 0.3);
+    --color-border: rgba(var(--color-gray-400-rgb), 0.3);
+    --color-error: var(--color-red-400);
+    --color-success: var(--color-teal-300);
+    --color-warning: var(--color-orange-400);
+    --color-info: var(--color-gray-300);
+    --color-focus-ring: rgba(var(--color-teal-300-rgb), 0.4);
+    --color-btn-primary-text: var(--color-slate-900);
+    --color-card-border: rgba(var(--color-gray-400-rgb), 0.2);
+    --color-card-border-inner: rgba(var(--color-gray-400-rgb), 0.15);
+    --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+    --color-select-caret: rgba(var(--color-gray-200-rgb), 0.8);
+
+    --color-success-rgb: var(--color-teal-300-rgb);
+    --color-error-rgb: var(--color-red-400-rgb);
+    --color-warning-rgb: var(--color-orange-400-rgb);
+    --color-info-rgb: var(--color-gray-300-rgb);
+  }
+}
+
+@font-face {
+  font-family: 'FKGroteskNeue';
+  src: url('https://r2cdn.perplexity.ai/fonts/FKGroteskNeue.woff2')
+    format('woff2');
+}
+
+html {
+  font-size: var(--font-size-base);
+  font-family: var(--font-family-base);
+  line-height: var(--line-height-normal);
+  color: var(--color-text);
+  background-color: var(--color-background);
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+/* Custom Styles */
+.hero-section {
+    text-align: center;
+    padding: 60px 20px;
+    background: var(--color-bg-1);
+    border-bottom: 1px solid var(--color-card-border);
+}
+
+.hero-section h1 {
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-16);
+    color: var(--color-text);
+}
+
+.hero-section .subtitle {
+    font-size: var(--font-size-xl);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-12);
+}
+
+.hero-section .description {
+    font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.section-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-card-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-32);
+    margin-bottom: var(--space-32);
+    box-shadow: var(--shadow-sm);
+}
+
+.section-title {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-24);
+    color: var(--color-text);
+    display: flex;
+    align-items: center;
+    gap: var(--space-12);
+}
+
+.skill-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-24);
+}
+
+.skill-item {
+    margin-bottom: var(--space-16);
+}
+
+.skill-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--space-8);
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+}
+
+.skill-value {
+    color: var(--color-primary);
+    font-weight: var(--font-weight-bold);
+}
+
+input[type="range"] {
+    width: 100%;
+    height: 6px;
+    border-radius: var(--radius-full);
+    background: var(--color-secondary);
+    outline: none;
+    -webkit-appearance: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    cursor: pointer;
+    transition: transform var(--duration-fast);
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    cursor: pointer;
+    border: none;
+    transition: transform var(--duration-fast);
+}
+
+input[type="range"]::-moz-range-thumb:hover {
+    transform: scale(1.2);
+}
+
+.additional-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-24);
+}
+
+.form-group {
+    margin-bottom: var(--space-16);
+}
+
+.form-label {
+    display: block;
+    margin-bottom: var(--space-8);
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+}
+
+.form-control {
+    width: 100%;
+    padding: var(--space-10) var(--space-12);
+    font-size: var(--font-size-base);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-base);
+    background: var(--color-surface);
+    color: var(--color-text);
+    transition: border-color var(--duration-fast);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: var(--focus-ring);
+}
+
+select.form-control {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: var(--select-caret-light);
+    background-repeat: no-repeat;
+    background-position: right var(--space-12) center;
+    background-size: 16px;
+    padding-right: var(--space-32);
+}
+
+@media (prefers-color-scheme: dark) {
+    select.form-control {
+        background-image: var(--select-caret-dark);
+    }
+}
+
+.predict-button {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    margin: 40px auto;
+    padding: var(--space-16) var(--space-32);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-btn-primary-text);
+    background: var(--color-primary);
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-standard);
+}
+
+.predict-button:hover {
+    background: var(--color-primary-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.predict-button:active {
+    transform: translateY(0);
+}
+
+.results-section {
+    display: none;
+    margin-top: 60px;
+}
+
+.results-section.visible {
+    display: block;
+}
+
+.primary-recommendation {
+    background: var(--color-bg-3);
+    border: 2px solid var(--color-success);
+    border-radius: var(--radius-lg);
+    padding: var(--space-32);
+    margin-bottom: var(--space-32);
+    text-align: center;
+}
+
+.career-icon {
+    font-size: 60px;
+    margin-bottom: var(--space-16);
+}
+
+.career-name {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-12);
+    color: var(--color-text);
+}
+
+.confidence-label {
+    font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-8);
+}
+
+.confidence-bar {
+    width: 100%;
+    height: 30px;
+    background: var(--color-secondary);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    margin-bottom: var(--space-16);
+}
+
+.confidence-fill {
+    height: 100%;
+    background: var(--color-success);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: var(--space-12);
+    color: var(--color-btn-primary-text);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-sm);
+    transition: width 1s var(--ease-standard);
+}
+
+.career-description {
+    font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-16);
+}
+
+.key-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-8);
+    justify-content: center;
+    margin-top: var(--space-16);
+}
+
+.skill-badge {
+    padding: var(--space-6) var(--space-12);
+    background: var(--color-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text);
+}
+
+.alternative-careers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-24);
+    margin-bottom: var(--space-32);
+}
+
+.career-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-card-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-24);
+    text-align: center;
+    transition: transform var(--duration-normal), box-shadow var(--duration-normal);
+}
+
+.career-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.career-card .career-icon {
+    font-size: 40px;
+}
+
+.career-card .career-name {
+    font-size: var(--font-size-xl);
+}
+
+.career-card .confidence-bar {
+    height: 20px;
+}
+
+.analysis-section {
+    margin-top: var(--space-32);
+}
+
+.strength-bars {
+    margin-bottom: var(--space-24);
+}
+
+.strength-item {
+    margin-bottom: var(--space-16);
+}
+
+.strength-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--space-6);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+}
+
+.strength-bar {
+    width: 100%;
+    height: 20px;
+    background: var(--color-secondary);
+    border-radius: var(--radius-base);
+    overflow: hidden;
+}
+
+.strength-fill {
+    height: 100%;
+    background: var(--color-primary);
+    transition: width 1s var(--ease-standard);
+}
+
+.improvement-areas {
+    background: var(--color-bg-2);
+    border: 1px solid var(--color-card-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-20);
+    margin-bottom: var(--space-24);
+}
+
+.improvement-areas h4 {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--space-12);
+    color: var(--color-text);
+}
+
+.improvement-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.improvement-list li {
+    padding: var(--space-8) 0;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+}
+
+.improvement-list li:before {
+    content: "→ ";
+    color: var(--color-warning);
+    font-weight: bold;
+}
+
+.action-buttons {
+    display: flex;
+    gap: var(--space-16);
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: var(--space-32);
+}
+
+.btn {
+    padding: var(--space-12) var(--space-24);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    border: none;
+    border-radius: var(--radius-base);
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-standard);
+}
+
+.btn-primary {
+    background: var(--color-primary);
+    color: var(--color-btn-primary-text);
+}
+
+.btn-primary:hover {
+    background: var(--color-primary-hover);
+}
+
+.btn-secondary {
+    background: var(--color-secondary);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+}
+
+.btn-secondary:hover {
+    background: var(--color-secondary-hover);
+}
+
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.loading-overlay.visible {
+    display: flex;
+}
+
+.loading-spinner {
+    width: 60px;
+    height: 60px;
+    border: 4px solid var(--color-secondary);
+    border-top-color: var(--color-primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: help;
+    color: var(--color-text-secondary);
+    margin-left: var(--space-4);
+}
+
+.tooltip:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--color-charcoal-800);
+    color: var(--color-cream-50);
+    padding: var(--space-8) var(--space-12);
+    border-radius: var(--radius-base);
+    font-size: var(--font-size-xs);
+    white-space: nowrap;
+    z-index: 100;
+}
+
+@media (max-width: 768px) {
+    .hero-section h1 {
+        font-size: var(--font-size-3xl);
+    }
+    
+    .section-card {
+        padding: var(--space-20);
+    }
+    
+    .skill-group {
+        grid-template-columns: 1fr;
+    }
+    
+    .alternative-careers {
+        grid-template-columns: 1fr;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="hero-section">
+        <h1>Software Engineering Career Path Predictor</h1>
+        <p class="subtitle">Discover your ideal tech career based on your skills</p>
+        <p class="description">Answer questions about your technical and soft skills, and our intelligent system will recommend the best software engineering career paths tailored to your strengths.</p>
+    </div>
+
+    <div class="container">
+        <!-- Technical Skills Section -->
+        <div class="section-card">
+            <h2 class="section-title">💻 Technical Skills</h2>
+            <p style="color: var(--color-text-secondary); margin-bottom: var(--space-24);">Rate your proficiency in the following technical areas (0 = No experience, 10 = Expert)</p>
+            <div class="skill-group">
+                <div>
+                    <div class="skill-item">
+                        <div class="skill-label">
+                            <span>Programming Languages</span>
+                            <span class="skill-value" id="programming-value">5</span>
+                        </div>
+                        <input type="range" id="programming" min="0" max="10" value="5" oninput="updateValue('programming')">
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-label">
+                            <span>Web Development</span>
+                            <span class="skill-value" id="web_dev-value">5</span>
+                        </div>
+                        <input type="range" id="web_dev" min="0" max="10" value="5" oninput="updateValue('web_dev')">
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-label">
+                            <span>Backend Frameworks</span>
+                            <span class="skill-value" id="backend-value">5</span>
+                        </div>
+                        <input type="range" id="backend" min="0" max="10" value="5" oninput="updateValue('backend')">
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-label">
+                            <span>Database Management</span>
+                            <span class="skill-value" id="database-value">5</span>
+                        </div>
+                        <input type="range" id="database" min="0" max="10" value="5" oninput="updateValue('database')">
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-label">
+                            <span>Cloud Platforms</span>
+                            <span class="skill-value" id="cloud-value">5</span>
+                        </div>
+                        <input type="range" id="cloud" min="0" max="10" value="5" oninput="updateValue('cloud')">
+                    </div>
+                </div>
+                <div>
+                    <div class="skill-item">
+                        <div class="skill-label">
+                            <span>DevOps Tools</span>
+                            <span class="skill-value" id="devops-value">5</span>
+                        </div>
+                        <input type="range" id="devops" min="0" max="10" value="5" oninput="updateValue('devops')">
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-label">
+                            <span>Machine Learning &amp; AI</span>
+                            <span class="skill-value" id="ml_ai-value">5</span>
+                        </div>
+                        <input type="range" id="ml_ai" min="0" max="10" value="5" oninput="updateValue('ml_ai')">
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-label">
+                            <span>Data Structures &amp; Algorithms</span>
+                            <span class="skill-value" id="algorithms-value">5</span>
+                        </div>
+                        <input type="range" id="algorithms" min="0" max="10" value="5" oninput="updateValue('algorithms')">
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-label">
+                            <span>Testing &amp; Debugging</span>
+                            <span class="skill-value" id="testing-value">5</span>
+                        </div>
+                        <input type="range" id="testing" min="0" max="10" value="5" oninput="updateValue('testing')">
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-label">
+                            <span>Mobile Development</span>
+                            <span class="skill-value" id="mobile-value">5</span>
+                        </div>
+                        <input type="range" id="mobile" min="0" max="10" value="5" oninput="updateValue('mobile')">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Soft Skills Section -->
+        <div class="section-card">
+            <h2 class="section-title">🤝 Soft Skills</h2>
+            <p style="color: var(--color-text-secondary); margin-bottom: var(--space-24);">Rate your soft skills and personal attributes (0 = Weak, 10 = Exceptional)</p>
+            <div class="skill-group">
+                <div>
+                    <div class="skill-item">
+                        <div class="skill-label">
+                            <span>Communication</span>
+                            <span class="skill-value" id="communication-value">5</span>
+                        </div>
+                        <input type="range" id="communication" min="0" max="10" value="5" oninput="updateValue('communication')">
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-label">
+                            <span>Teamwork &amp; Collaboration</span>
+                            <span class="skill-value" id="teamwork-value">5</span>
+                        </div>
+                        <input type="range" id="teamwork" min="0" max="10" value="5" oninput="updateValue('teamwork')">
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-label">
+                            <span>Problem Solving</span>
+                            <span class="skill-value" id="problem_solving-value">5</span>
+                        </div>
+                        <input type="range" id="problem_solving" min="0" max="10" value="5" oninput="updateValue('problem_solving')">
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-label">
+                            <span>Adaptability</span>
+                            <span class="skill-value" id="adaptability-value">5</span>
+                        </div>
+                        <input type="range" id="adaptability" min="0" max="10" value="5" oninput="updateValue('adaptability')">
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-label">
+                            <span>Time Management</span>
+                            <span class="skill-value" id="time_management-value">5</span>
+                        </div>
+                        <input type="range" id="time_management" min="0" max="10" value="5" oninput="updateValue('time_management')">
+                    </div>
+                </div>
+                <div>
+                    <div class="skill-item">
+                        <div class="skill-label">
+                            <span>Leadership</span>
+                            <span class="skill-value" id="leadership-value">5</span>
+                        </div>
+                        <input type="range" id="leadership" min="0" max="10" value="5" oninput="updateValue('leadership')">
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-label">
+                            <span>Critical Thinking</span>
+                            <span class="skill-value" id="critical_thinking-value">5</span>
+                        </div>
+                        <input type="range" id="critical_thinking" min="0" max="10" value="5" oninput="updateValue('critical_thinking')">
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-label">
+                            <span>Creativity</span>
+                            <span class="skill-value" id="creativity-value">5</span>
+                        </div>
+                        <input type="range" id="creativity" min="0" max="10" value="5" oninput="updateValue('creativity')">
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-label">
+                            <span>Attention to Detail</span>
+                            <span class="skill-value" id="attention-value">5</span>
+                        </div>
+                        <input type="range" id="attention" min="0" max="10" value="5" oninput="updateValue('attention')">
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-label">
+                            <span>Learning Agility</span>
+                            <span class="skill-value" id="learning_agility-value">5</span>
+                        </div>
+                        <input type="range" id="learning_agility" min="0" max="10" value="5" oninput="updateValue('learning_agility')">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Information Section -->
+        <div class="section-card">
+            <h2 class="section-title">📋 Additional Information</h2>
+            <div class="additional-info">
+                <div class="form-group">
+                    <label class="form-label" for="experience">Years of Experience</label>
+                    <input type="number" id="experience" class="form-control" min="0" max="20" value="0">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="education">Education Level</label>
+                    <select id="education" class="form-control">
+                        <option value="high_school">High School</option>
+                        <option value="bachelors" selected>Bachelor's Degree</option>
+                        <option value="masters">Master's Degree</option>
+                        <option value="phd">PhD</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="work_style">Preferred Work Style</label>
+                    <select id="work_style" class="form-control">
+                        <option value="independent">Independent</option>
+                        <option value="team" selected>Team-based</option>
+                        <option value="mixed">Mixed</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <button class="predict-button" onclick="predictCareer()">Predict My Career Path</button>
+
+        <!-- Results Section -->
+        <div class="results-section" id="resultsSection">
+            <div class="section-card">
+                <h2 class="section-title">🎯 Your Career Recommendations</h2>
+                
+                <!-- Primary Recommendation -->
+                <div class="primary-recommendation" id="primaryRecommendation">
+                    <div class="career-icon" id="primaryIcon">💻</div>
+                    <h3 class="career-name" id="primaryName">Frontend Developer</h3>
+                    <p class="confidence-label">Match Confidence</p>
+                    <div class="confidence-bar">
+                        <div class="confidence-fill" id="primaryConfidence" style="width: 0%;">0%</div>
+                    </div>
+                    <p class="career-description" id="primaryDescription"></p>
+                    <div class="key-skills" id="primarySkills"></div>
+                </div>
+
+                <h3 style="font-size: var(--font-size-xl); margin-bottom: var(--space-20); color: var(--color-text);">Alternative Career Paths</h3>
+                <div class="alternative-careers" id="alternativeCareers"></div>
+            </div>
+
+            <!-- Detailed Analysis -->
+            <div class="section-card analysis-section">
+                <h2 class="section-title">📊 Skill Analysis</h2>
+                
+                <h4 style="font-size: var(--font-size-lg); margin-bottom: var(--space-16); color: var(--color-text);">Your Top Strengths</h4>
+                <div class="strength-bars" id="strengthBars"></div>
+
+                <div class="improvement-areas">
+                    <h4>Areas for Growth</h4>
+                    <ul class="improvement-list" id="improvementList"></ul>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-primary" onclick="window.open('https://www.coursera.org/', '_blank')">Explore Learning Resources</button>
+                    <button class="btn btn-secondary" onclick="retakeAssessment()">Retake Assessment</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <script>
+        // Career data
+        const careers = [
+            {
+                name: "Frontend Developer",
+                icon: "💻",
+                description: "Build beautiful and responsive user interfaces for web applications",
+                key_skills: ["Web Development", "Creativity", "Attention to Detail"],
+                weights: {
+                    web_dev: 0.25,
+                    creativity: 0.20,
+                    attention: 0.15,
+                    programming: 0.15,
+                    problem_solving: 0.10
+                }
+            },
+            {
+                name: "Backend Developer",
+                icon: "⚙️",
+                description: "Design and implement server-side logic and databases",
+                key_skills: ["Programming Languages", "Database Management", "Problem Solving"],
+                weights: {
+                    programming: 0.25,
+                    database: 0.20,
+                    problem_solving: 0.15,
+                    backend: 0.15,
+                    algorithms: 0.10
+                }
+            },
+            {
+                name: "Full Stack Developer",
+                icon: "🎯",
+                description: "Master both frontend and backend development",
+                key_skills: ["Web Development", "Programming", "Adaptability"],
+                weights: {
+                    web_dev: 0.18,
+                    programming: 0.18,
+                    database: 0.15,
+                    backend: 0.15,
+                    adaptability: 0.12
+                }
+            },
+            {
+                name: "Data Engineer",
+                icon: "📊",
+                description: "Build and maintain data pipelines and infrastructure",
+                key_skills: ["Database Management", "Cloud Platforms", "Data Structures"],
+                weights: {
+                    database: 0.25,
+                    cloud: 0.20,
+                    algorithms: 0.15,
+                    programming: 0.15,
+                    problem_solving: 0.10
+                }
+            },
+            {
+                name: "Machine Learning Engineer",
+                icon: "🤖",
+                description: "Develop AI models and machine learning solutions",
+                key_skills: ["Machine Learning & AI", "Programming", "Algorithms"],
+                weights: {
+                    ml_ai: 0.30,
+                    programming: 0.20,
+                    algorithms: 0.15,
+                    problem_solving: 0.12,
+                    learning_agility: 0.10
+                }
+            },
+            {
+                name: "DevOps Engineer",
+                icon: "🔧",
+                description: "Automate and optimize deployment and infrastructure",
+                key_skills: ["DevOps Tools", "Cloud Platforms", "Automation"],
+                weights: {
+                    devops: 0.25,
+                    cloud: 0.20,
+                    programming: 0.15,
+                    problem_solving: 0.12,
+                    adaptability: 0.10
+                }
+            },
+            {
+                name: "Security Engineer",
+                icon: "🔒",
+                description: "Protect systems and data from security threats",
+                key_skills: ["Critical Thinking", "Testing & Debugging", "Attention to Detail"],
+                weights: {
+                    critical_thinking: 0.20,
+                    testing: 0.20,
+                    attention: 0.18,
+                    problem_solving: 0.15,
+                    programming: 0.12
+                }
+            },
+            {
+                name: "Mobile Developer",
+                icon: "📱",
+                description: "Create mobile applications for iOS and Android",
+                key_skills: ["Mobile Development", "UI/UX Design", "Creativity"],
+                weights: {
+                    mobile: 0.30,
+                    creativity: 0.18,
+                    programming: 0.15,
+                    problem_solving: 0.12,
+                    attention: 0.10
+                }
+            },
+            {
+                name: "QA Engineer",
+                icon: "✅",
+                description: "Ensure software quality through testing and automation",
+                key_skills: ["Testing & Debugging", "Attention to Detail", "Problem Solving"],
+                weights: {
+                    testing: 0.25,
+                    attention: 0.20,
+                    problem_solving: 0.15,
+                    critical_thinking: 0.12,
+                    programming: 0.10
+                }
+            },
+            {
+                name: "Cloud Architect",
+                icon: "☁️",
+                description: "Design scalable cloud infrastructure solutions",
+                key_skills: ["Cloud Platforms", "Architecture Design", "Leadership"],
+                weights: {
+                    cloud: 0.30,
+                    leadership: 0.18,
+                    problem_solving: 0.15,
+                    programming: 0.12,
+                    communication: 0.10
+                }
+            }
+        ];
+
+        function updateValue(skillId) {
+            const slider = document.getElementById(skillId);
+            const valueDisplay = document.getElementById(skillId + '-value');
+            valueDisplay.textContent = slider.value;
+        }
+
+        function getSkillValues() {
+            const skills = {};
+            const skillIds = [
+                'programming', 'web_dev', 'backend', 'database', 'cloud',
+                'devops', 'ml_ai', 'algorithms', 'testing', 'mobile',
+                'communication', 'teamwork', 'problem_solving', 'adaptability',
+                'time_management', 'leadership', 'critical_thinking', 'creativity',
+                'attention', 'learning_agility'
+            ];
+            
+            skillIds.forEach(id => {
+                skills[id] = parseInt(document.getElementById(id).value);
+            });
+            
+            return skills;
+        }
+
+        function calculateCareerScores(skills) {
+            const scores = [];
+            const experience = parseInt(document.getElementById('experience').value);
+            const education = document.getElementById('education').value;
+            
+            // Education multipliers
+            const eduMultipliers = {
+                'high_school': 0.9,
+                'bachelors': 1.0,
+                'masters': 1.1,
+                'phd': 1.15
+            };
+            
+            // Experience bonus (up to 20% boost)
+            const expBonus = Math.min(experience * 0.01, 0.2);
+            
+            careers.forEach(career => {
+                let score = 0;
+                let totalWeight = 0;
+                
+                // Calculate weighted score
+                for (const [skill, weight] of Object.entries(career.weights)) {
+                    if (skills[skill] !== undefined) {
+                        score += skills[skill] * weight * 10;
+                        totalWeight += weight;
+                    }
+                }
+                
+                // Normalize score
+                if (totalWeight > 0) {
+                    score = score / totalWeight;
+                }
+                
+                // Apply education and experience modifiers
+                score *= eduMultipliers[education];
+                score *= (1 + expBonus);
+                
+                // Cap at 100
+                score = Math.min(score, 100);
+                
+                scores.push({
+                    career: career,
+                    score: score
+                });
+            });
+            
+            // Sort by score descending
+            scores.sort((a, b) => b.score - a.score);
+            
+            return scores;
+        }
+
+        function displayResults(scores) {
+            // Display primary recommendation
+            const primary = scores[0];
+            document.getElementById('primaryIcon').textContent = primary.career.icon;
+            document.getElementById('primaryName').textContent = primary.career.name;
+            document.getElementById('primaryDescription').textContent = primary.career.description;
+            
+            const confidencePercent = Math.round(primary.score);
+            setTimeout(() => {
+                document.getElementById('primaryConfidence').style.width = confidencePercent + '%';
+                document.getElementById('primaryConfidence').textContent = confidencePercent + '%';
+            }, 100);
+            
+            // Display key skills
+            const skillsContainer = document.getElementById('primarySkills');
+            skillsContainer.innerHTML = '';
+            primary.career.key_skills.forEach(skill => {
+                const badge = document.createElement('span');
+                badge.className = 'skill-badge';
+                badge.textContent = skill;
+                skillsContainer.appendChild(badge);
+            });
+            
+            // Display alternative careers
+            const alternativesContainer = document.getElementById('alternativeCareers');
+            alternativesContainer.innerHTML = '';
+            
+            for (let i = 1; i <= 2 && i < scores.length; i++) {
+                const alt = scores[i];
+                const card = document.createElement('div');
+                card.className = 'career-card';
+                
+                const altConfidence = Math.round(alt.score);
+                card.innerHTML = `
+                    <div class="career-icon">${alt.career.icon}</div>
+                    <h4 class="career-name">${alt.career.name}</h4>
+                    <p class="confidence-label">Match: ${altConfidence}%</p>
+                    <div class="confidence-bar">
+                        <div class="confidence-fill" style="width: ${altConfidence}%;"></div>
+                    </div>
+                    <p class="career-description" style="font-size: var(--font-size-sm); margin-top: var(--space-12);">${alt.career.description}</p>
+                `;
+                alternativesContainer.appendChild(card);
+            }
+            
+            // Display skill analysis
+            displaySkillAnalysis();
+            
+            // Show results section
+            document.getElementById('resultsSection').classList.add('visible');
+            
+            // Scroll to results
+            setTimeout(() => {
+                document.getElementById('resultsSection').scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }, 100);
+        }
+
+        function displaySkillAnalysis() {
+            const skills = getSkillValues();
+            const skillNames = {
+                'programming': 'Programming Languages',
+                'web_dev': 'Web Development',
+                'backend': 'Backend Frameworks',
+                'database': 'Database Management',
+                'cloud': 'Cloud Platforms',
+                'devops': 'DevOps Tools',
+                'ml_ai': 'Machine Learning & AI',
+                'algorithms': 'Data Structures & Algorithms',
+                'testing': 'Testing & Debugging',
+                'mobile': 'Mobile Development',
+                'communication': 'Communication',
+                'teamwork': 'Teamwork',
+                'problem_solving': 'Problem Solving',
+                'adaptability': 'Adaptability',
+                'time_management': 'Time Management',
+                'leadership': 'Leadership',
+                'critical_thinking': 'Critical Thinking',
+                'creativity': 'Creativity',
+                'attention': 'Attention to Detail',
+                'learning_agility': 'Learning Agility'
+            };
+            
+            // Sort skills by value
+            const sortedSkills = Object.entries(skills).sort((a, b) => b[1] - a[1]);
+            
+            // Display top 5 strengths
+            const strengthBars = document.getElementById('strengthBars');
+            strengthBars.innerHTML = '';
+            
+            for (let i = 0; i < 5 && i < sortedSkills.length; i++) {
+                const [skillId, value] = sortedSkills[i];
+                const strengthItem = document.createElement('div');
+                strengthItem.className = 'strength-item';
+                strengthItem.innerHTML = `
+                    <div class="strength-label">
+                        <span>${skillNames[skillId]}</span>
+                        <span style="color: var(--color-primary); font-weight: var(--font-weight-bold);">${value}/10</span>
+                    </div>
+                    <div class="strength-bar">
+                        <div class="strength-fill" style="width: 0%;"></div>
+                    </div>
+                `;
+                strengthBars.appendChild(strengthItem);
+                
+                // Animate bar
+                setTimeout(() => {
+                    strengthItem.querySelector('.strength-fill').style.width = (value * 10) + '%';
+                }, 100 + (i * 100));
+            }
+            
+            // Display areas for improvement (bottom 3 skills)
+            const improvementList = document.getElementById('improvementList');
+            improvementList.innerHTML = '';
+            
+            const weakSkills = sortedSkills.slice(-3).reverse();
+            weakSkills.forEach(([skillId, value]) => {
+                if (value < 7) {
+                    const li = document.createElement('li');
+                    li.textContent = `Improve ${skillNames[skillId]} (Currently ${value}/10)`;
+                    improvementList.appendChild(li);
+                }
+            });
+            
+            if (improvementList.children.length === 0) {
+                improvementList.innerHTML = '<li>Great job! Your skills are well-rounded.</li>';
+            }
+        }
+
+        function predictCareer() {
+            // Show loading
+            document.getElementById('loadingOverlay').classList.add('visible');
+            
+            // Simulate processing time
+            setTimeout(() => {
+                const skills = getSkillValues();
+                const scores = calculateCareerScores(skills);
+                displayResults(scores);
+                
+                // Hide loading
+                document.getElementById('loadingOverlay').classList.remove('visible');
+            }, 1500);
+        }
+
+        function retakeAssessment() {
+            // Reset all sliders to 5
+            const sliders = document.querySelectorAll('input[type="range"]');
+            sliders.forEach(slider => {
+                slider.value = 5;
+                updateValue(slider.id);
+            });
+            
+            // Reset other inputs
+            document.getElementById('experience').value = 0;
+            document.getElementById('education').value = 'bachelors';
+            document.getElementById('work_style').value = 'team';
+            
+            // Hide results
+            document.getElementById('resultsSection').classList.remove('visible');
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
